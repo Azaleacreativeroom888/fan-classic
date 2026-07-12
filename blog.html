@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>Blog | Andante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F4EAD2;
+    --paper-deep: #ECDDB8;
+    --ink: #3B2A1E;
+    --ink-soft: #6B5443;
+    --walnut: #6B4226;
+    --caramel: #A9714B;
+    --gold: #B8935A;
+    --line: rgba(59,42,30,0.16);
+    --shadow: rgba(59,42,30,0.22);
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(184,147,90,0.10), transparent 45%),
+      radial-gradient(ellipse at 100% 30%, rgba(107,66,38,0.08), transparent 40%),
+      var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; text-decoration: none; }
+  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  ::selection{ background: var(--gold); color: var(--paper); }
+
+  /* Header */
+  .site-header{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244,234,210,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header .wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .logo{ font-family:'Cormorant Garamond', serif; font-size:28px; font-weight:600; letter-spacing:0.06em; color:var(--walnut); }
+  .logo span{ font-style:italic; font-weight:400; color:var(--ink-soft); font-size:14px; margin-left:8px; }
+  nav.main-nav ul{ display:flex; gap:36px; list-style:none; }
+  nav.main-nav a{ font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); position:relative; padding-bottom:4px; }
+  nav.main-nav a::after{ content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--caramel); transition:width .3s ease; }
+  nav.main-nav a:hover::after, nav.main-nav a.active::after{ width:100%; }
+  nav.main-nav a.active{ color:var(--walnut); }
+  .nav-toggle{ display:none; background:none; border:none; font-size:26px; color:var(--walnut); cursor:pointer; }
+  @media (max-width:760px){
+    nav.main-nav{ position:absolute; top:76px; left:0; right:0; background:var(--paper); border-bottom:1px solid var(--line); max-height:0; overflow:hidden; transition:max-height .35s ease; }
+    nav.main-nav.open{ max-height:320px; }
+    nav.main-nav ul{ flex-direction:column; gap:0; padding:8px 28px 20px; }
+    nav.main-nav li{ border-bottom:1px solid var(--line); }
+    nav.main-nav a{ display:block; padding:14px 0; }
+    .nav-toggle{ display:block; }
+  }
+
+  /* Page header */
+  .page-head{ padding: 76px 0 40px; text-align:center; }
+  .staff-mini{ width:min(320px,70%); margin:0 auto 26px; display:block; }
+  .staff-mini line{ stroke:var(--ink); stroke-width:1; opacity:0.5; }
+  .eyebrow{ font-size:13px; letter-spacing:0.22em; text-transform:uppercase; color:var(--caramel); margin-bottom:14px; font-style:italic; display:block; }
+  .page-head h1{ font-family:'Cormorant Garamond', serif; font-size:clamp(44px,8vw,64px); font-weight:500; color:var(--walnut); }
+  .page-head p.sub{ max-width:460px; margin:16px auto 0; color:var(--ink-soft); font-size:16px; }
+
+  /* Diary list */
+  .diary-list{ max-width: 680px; margin: 0 auto; padding: 20px 0 100px; }
+  .entry{ padding: 30px 0; border-bottom: 1px solid var(--line); }
+  .entry:first-child{ padding-top: 0; }
+  .entry time{
+    display:block; font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size: 15px; letter-spacing:0.08em; color: var(--caramel); margin-bottom: 10px;
+  }
+  .entry p{ font-size: 17px; color: var(--ink); }
+
+  footer{ border-top:1px solid var(--line); padding:40px 0 50px; text-align:center; }
+  footer .notice{ font-size:12.5px; color:var(--ink-soft); max-width:520px; margin:0 auto 14px; line-height:1.7; }
+  footer .copy{ font-size:12px; color:var(--ink-soft); letter-spacing:0.05em; }
+
+  :focus-visible{ outline: 2px solid var(--caramel); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">Andante<span>クラシック音楽の記録</span></div>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="playlist.html">Playlist</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く">☰</button>
+  </div>
+</header>
+
+<div class="page-head wrap">
+  <svg class="staff-mini" viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="6" x2="320" y2="6"/>
+    <line x1="0" y1="20" x2="320" y2="20"/>
+    <line x1="0" y1="34" x2="320" y2="34"/>
+    <line x1="0" y1="48" x2="320" y2="48"/>
+    <line x1="0" y1="60" x2="320" y2="60"/>
+  </svg>
+  <span class="eyebrow">Diary</span>
+  <h1>Blog</h1>
+  <p class="sub">聴いた音楽、通った演奏会について、思いついたときに書き留める日記です。</p>
+</div>
+
+<main class="diary-list">
+  <article class="entry">
+    <time>2026.07.10</time>
+    <p>ラジオから流れてきたブラームスの交響曲第4番に、通勤中の足を止めた。第4楽章のパッサカリアは何度聴いても緊迫感が違う。</p>
+  </article>
+  <article class="entry">
+    <time>2026.07.03</time>
+    <p>久しぶりに演奏会へ。ラフマニノフのピアノ協奏曲第2番、第2楽章の弦の入りで少し泣きそうになった。</p>
+  </article>
+  <article class="entry">
+    <time>2026.06.28</time>
+    <p>グレン・グールドのゴルトベルク変奏曲、1955年盤と1981年盤を続けて聴き比べる夜。同じ曲でこんなに違って聴こえるのが面白い。</p>
+  </article>
+  <article class="entry">
+    <time>2026.06.19</time>
+    <p>楽器店でヴィオラの試奏を聴かせてもらった。ヴァイオリンより一段低く、地に足のついた声のような音がする。</p>
+  </article>
+  <article class="entry">
+    <time>2026.06.05</time>
+    <p>雨の日はシベリウスと決めている。交響曲第5番の終楽章、あの断片的な和音の連打を聴くと、なぜか安心する。</p>
+  </article>
+  <article class="entry">
+    <time>2026.05.22</time>
+    <p>古書店でカザルスの自伝を見つけて購入。バッハの無伴奏チェロ組曲を発見した経緯のくだりを何度も読み返している。</p>
+  </article>
+  <article class="entry">
+    <time>2026.05.10</time>
+    <p>友人とベートーヴェンの後期弦楽四重奏について長々と話す。第14番は聴くたびに構造が違って見えてくる。</p>
+  </article>
+  <article class="entry">
+    <time>2026.04.27</time>
+    <p>初めて聴いたメシアンの「世の終わりのための四重奏曲」。強制収容所で書かれた曲だと知って、聴こえ方が変わった。</p>
+  </article>
+  <article class="entry">
+    <time>2026.04.14</time>
+    <p>近所のホールで学生オーケストラのドヴォルザーク「新世界より」。技術より熱量で押し切る演奏に、逆に胸を打たれた。</p>
+  </article>
+  <article class="entry">
+    <time>2026.03.30</time>
+    <p>桜が散り始めた頃に聴きたくなるのは決まってフォーレのレクイエム。「ピエ・イエズ」の旋律が、余韻をそのまま持っていってしまう。</p>
+  </article>
+  <article class="entry">
+    <time>2026.03.15</time>
+    <p>楽譜を買いに行って、そのままショパンのノクターン第20番を練習し始める。左手の伴奏がどうしても走ってしまう。</p>
+  </article>
+  <article class="entry">
+    <time>2026.02.28</time>
+    <p>図書館でストラヴィンスキーの「春の祭典」のスコアを借りる。変拍子の連続を目で追うだけでも息が上がる。</p>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="notice">本サイトに掲載する文章・画像等の無断転載、およびAI学習目的での使用を禁止します。No AI training on the content of this site.</p>
+    <p class="copy">© 2026 Andante — Azalea Creative Room</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('mainNav').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
