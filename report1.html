@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>クラシックの曲のメモ | Andante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F4EAD2;
+    --paper-deep: #ECDDB8;
+    --ink: #3B2A1E;
+    --ink-soft: #6B5443;
+    --walnut: #6B4226;
+    --caramel: #A9714B;
+    --gold: #B8935A;
+    --line: rgba(59,42,30,0.16);
+    --shadow: rgba(59,42,30,0.22);
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(184,147,90,0.10), transparent 45%),
+      radial-gradient(ellipse at 100% 30%, rgba(107,66,38,0.08), transparent 40%),
+      var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; text-decoration: none; }
+  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  ::selection{ background: var(--gold); color: var(--paper); }
+
+  /* Header */
+  .site-header{ position: sticky; top:0; z-index:50; background: rgba(244,234,210,0.88); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  .site-header .wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .logo{ font-family:'Cormorant Garamond', serif; font-size:28px; font-weight:600; letter-spacing:0.06em; color:var(--walnut); }
+  .logo span{ font-style:italic; font-weight:400; color:var(--ink-soft); font-size:14px; margin-left:8px; }
+  nav.main-nav ul{ display:flex; gap:36px; list-style:none; }
+  nav.main-nav a{ font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); position:relative; padding-bottom:4px; }
+  nav.main-nav a::after{ content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--caramel); transition:width .3s ease; }
+  nav.main-nav a:hover::after, nav.main-nav a.active::after{ width:100%; }
+  nav.main-nav a.active{ color:var(--walnut); }
+  .nav-toggle{ display:none; background:none; border:none; font-size:26px; color:var(--walnut); cursor:pointer; }
+  @media (max-width:760px){
+    nav.main-nav{ position:absolute; top:76px; left:0; right:0; background:var(--paper); border-bottom:1px solid var(--line); max-height:0; overflow:hidden; transition:max-height .35s ease; }
+    nav.main-nav.open{ max-height:320px; }
+    nav.main-nav ul{ flex-direction:column; gap:0; padding:8px 28px 20px; }
+    nav.main-nav li{ border-bottom:1px solid var(--line); }
+    nav.main-nav a{ display:block; padding:14px 0; }
+    .nav-toggle{ display:block; }
+  }
+
+  /* Page header */
+  .page-head{ padding: 76px 0 40px; text-align:center; }
+  .staff-mini{ width:min(320px,70%); margin:0 auto 26px; display:block; }
+  .staff-mini line{ stroke:var(--ink); stroke-width:1; opacity:0.5; }
+  .eyebrow{ font-size:13px; letter-spacing:0.22em; text-transform:uppercase; color:var(--caramel); margin-bottom:14px; font-style:italic; display:block; }
+  .page-head h1{ font-family:'Cormorant Garamond', serif; font-size:clamp(36px,7vw,56px); font-weight:500; color:var(--walnut); line-height:1.3; }
+  .page-head p.sub{ max-width:460px; margin:16px auto 0; color:var(--ink-soft); font-size:16px; }
+
+  /* Memo list */
+  .memo-list{ max-width: 720px; margin: 0 auto; padding: 10px 0 40px; }
+  .memo{
+    padding: 34px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .memo:first-child{ padding-top: 0; }
+  .memo .title{
+    font-family:'Cormorant Garamond', serif; font-weight:600;
+    font-size: 28px; color: var(--walnut); line-height: 1.4;
+  }
+  .memo .composer{
+    font-family:'Cormorant Garamond', serif; font-style: italic;
+    font-size: 16px; color: var(--caramel); letter-spacing: 0.04em;
+    margin: 2px 0 14px;
+  }
+  .memo .desc{ font-size: 16.5px; color: var(--ink); }
+
+  .back-wrap{ text-align:center; padding: 20px 0 110px; }
+  .back-link{
+    display:inline-block;
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--walnut); border-bottom: 1px solid var(--caramel); padding-bottom: 3px;
+  }
+
+  footer{ border-top:1px solid var(--line); padding:40px 0 50px; text-align:center; }
+  footer .notice{ font-size:12.5px; color:var(--ink-soft); max-width:520px; margin:0 auto 14px; line-height:1.7; }
+  footer .copy{ font-size:12px; color:var(--ink-soft); letter-spacing:0.05em; }
+
+  :focus-visible{ outline: 2px solid var(--caramel); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">Andante<span>クラシック音楽の記録</span></div>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="playlist.html">Playlist</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く">☰</button>
+  </div>
+</header>
+
+<div class="page-head wrap">
+  <svg class="staff-mini" viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="6" x2="320" y2="6"/>
+    <line x1="0" y1="20" x2="320" y2="20"/>
+    <line x1="0" y1="34" x2="320" y2="34"/>
+    <line x1="0" y1="48" x2="320" y2="48"/>
+    <line x1="0" y1="60" x2="320" y2="60"/>
+  </svg>
+  <span class="eyebrow">Report</span>
+  <h1>クラシックの曲のメモ</h1>
+  <p class="sub">聴いた曲についての覚え書きです。</p>
+</div>
+
+<main class="memo-list wrap">
+
+  <article class="memo">
+    <h2 class="title">月の光</h2>
+    <p class="composer">クロード・ドビュッシー</p>
+    <p class="desc">『ベルガマスク組曲』の第3曲で、題名はヴェルレーヌの詩に由来します。1890年頃に書かれ、1905年に出版されました。和声が輪郭を持たずに揺れ続け、夜の静けさをそのまま音にしたような印象派の代表的なピアノ曲です。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">交響曲第4番</h2>
+    <p class="composer">ヨハネス・ブラームス</p>
+    <p class="desc">1885年に初演されたブラームス最後の交響曲です。第4楽章はパッサカリアという形式で、バッハのカンタータ第150番の主題をもとにした短い旋律が、30以上の変奏となって積み重なっていきます。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">ピアノ協奏曲第2番</h2>
+    <p class="composer">セルゲイ・ラフマニノフ</p>
+    <p class="desc">1901年に完成したハ短調の協奏曲です。交響曲第1番の初演が失敗に終わったあと、立ち直る過程で書かれた作品として知られています。第2楽章の抒情的な旋律は、とくに人気があります。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">ゴルトベルク変奏曲</h2>
+    <p class="composer">ヨハン・ゼバスティアン・バッハ</p>
+    <p class="desc">1741年に出版された、アリアと30の変奏からなる鍵盤作品です。グレン・グールドは1955年と1981年に録音しており、同じ曲とは思えないほど解釈が違うので、聴き比べると面白いです。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">交響曲第5番</h2>
+    <p class="composer">ジャン・シベリウス</p>
+    <p class="desc">1915年の初稿のあと改訂を重ね、1919年に現在の形になりました。終楽章に現れる、白鳥の飛翔にたとえられる雄大な旋律と、最後に間を置いて打ち込まれる和音が印象に残ります。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">無伴奏チェロ組曲第1番</h2>
+    <p class="composer">ヨハン・ゼバスティアン・バッハ</p>
+    <p class="desc">冒頭のプレリュードは、チェロ1本だけで和声の広がりを感じさせる名曲です。この組曲は長く練習曲と見なされていましたが、若き日のカザルスが楽譜店で見つけ、のちに演奏会で取り上げて広く知られるようになりました。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">弦楽四重奏曲第14番</h2>
+    <p class="composer">ルートヴィヒ・ヴァン・ベートーヴェン</p>
+    <p class="desc">ベートーヴェンの最晩年に書かれた作品で、7つの楽章が途切れずに演奏されます。聴くたびに全体の構造の見え方が変わってくる曲です。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">世の終わりのための四重奏曲</h2>
+    <p class="composer">オリヴィエ・メシアン</p>
+    <p class="desc">第二次世界大戦中、捕虜収容所に収容されていたメシアンが1940年から41年にかけて書き、収容所内で初演されました。ヴァイオリン、チェロ、クラリネット、ピアノという編成で、時間の感覚が溶けていくような音楽です。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">交響曲第9番「新世界より」</h2>
+    <p class="composer">アントニン・ドヴォルザーク</p>
+    <p class="desc">ドヴォルザークがアメリカに滞在していた1893年に初演された交響曲です。第2楽章の旋律は「家路」として親しまれています。技術よりも熱量が前に出る演奏でも、強く胸に響く曲です。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">レクイエム</h2>
+    <p class="composer">ガブリエル・フォーレ</p>
+    <p class="desc">1888年に初稿が書かれた、穏やかな表情で知られるレクイエムです。「怒りの日」を大きく取り上げない代わりに、「ピエ・イエズ」のようにやわらかな祈りの音楽が中心になっています。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">夜想曲第20番 嬰ハ短調</h2>
+    <p class="composer">フレデリック・ショパン</p>
+    <p class="desc">1830年頃に書かれ、ショパンの死後、1875年に出版されました。「レント・コン・グラン・エスプレッシオーネ」と指示された、静かで内省的な曲です。左手の伴奏が走りやすいので、練習すると難しさがわかります。</p>
+  </article>
+
+  <article class="memo">
+    <h2 class="title">春の祭典</h2>
+    <p class="composer">イーゴリ・ストラヴィンスキー</p>
+    <p class="desc">バレエ・リュスのために書かれ、1913年にパリで初演されました。変拍子と不協和音が連続する革新的な音楽で、初演時には客席が騒然としたという逸話でも有名です。</p>
+  </article>
+
+</main>
+
+<div class="back-wrap">
+  <a class="back-link" href="gallery.html">← Galleryに戻る</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="notice">本サイトに掲載する文章・画像等の無断転載、およびAI学習目的での使用を禁止します。No AI training on the content of this site.</p>
+    <p class="copy">© 2026 Andante — Azalea Creative Room</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('mainNav').classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
